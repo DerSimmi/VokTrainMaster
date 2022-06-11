@@ -44,3 +44,12 @@ Durch euch hatte ich immer eine Motivation, weiterzumachen.
 
 Einfach ein fettes Danke <3
 ~ Simon
+
+
+
+__________________________________________________________________________________________________________
+
+
+Info:
+
+Dieses Projekt wir von < Artoris Dev Studios > geleitet
