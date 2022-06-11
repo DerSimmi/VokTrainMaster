@@ -1,7 +1,9 @@
 #####################################################################
-#                          vokss Train Master                         #
+#                          Vok Train Master                         #
 #                     by Simon, ico277 and BReep                    #
 #####################################################################
+
+#Module laden
 
 print(f' ')
 print(f' ')
@@ -10,26 +12,29 @@ print('Import Modules')
 from os import path
 from tkinter import Tk, simpledialog, messagebox
 from os.path import exists
-import random, configparser, platform
+import random, toml, configparser, platform
+from xml.etree.ElementTree import VERSION
 print('Modules imported sucess')
 print('Loding GLOBAL Variables')
 global VERSION
 global ver
 global folder
 global debugmode
-global voks
+global vok
 global datei
 global cfg
 global username
 global config
 global configver
+VERSION	= '1.0.2'
+print (VERSION)
 print('Variables loaded sucess')
 print('loading Config parameters')
 if not exists(f"./config.ini"):
     yesno = messagebox.askyesno("Config fehler", "Die Configurations-Datei existiert nicht.\nSoll eine neue erstellt werden?")
     if yesno: 
         with open(f"./config.ini", "w") as file:
-            file.write("[DEFAULT]\npfad = .\nDeinName = Nutzer\n\n[DEBUG]\ndebug = false\n\n[Update]\nForceUpdate = no\nSkipUpdates = no\n\n[Version]\nConfigVersion = 1.0.2\n#do not change this")
+            file.write("[DEFAULT]\npfad = .\nDeinName = Nutzer\n\n[DEBUG]\ndebug = false\n\n[Update]\nForceUpdate = no\nSkipUpdates = no\n\n[Version]\nConfigVersion = 1.0.1\n#do not change this")
             file.close()
     else:
         exit()
@@ -41,27 +46,26 @@ username = config['DEFAULT']['DeinName']
 configver = config['Version']['ConfigVersion']
 print('Config parameters imported sucess')
 print('Parsing Version')
-VERSION = "1.0.1"
 if VERSION != configver:
     print('Fehler: Code 1926 | Bitte melde dich im Discord-Support')
     quit()
 print('Parsing Version completed')
-print('Check for vokss file')
+print('Check for Vok file')
 if datei == '.':
     print ('Verzeichnis: Intern')
 else:
     print ('Verzeichnis:' + datei)
 folder = datei
-if not exists(f"{folder}/vok.ini"):
-    yesno = messagebox.askyesno("voks.ini", "Die vokss.toml Datei existiert nicht.\nSoll eine neue erstellt werden?")
+if not exists(f"{folder}/vok.toml"):
+    yesno = messagebox.askyesno("vok.toml", "Die vok.toml Datei existiert nicht.\nSoll eine neue erstellt werden?")
     if yesno: 
-        with open(f"{folder}/vok.ini", "w") as file:
+        with open(f"{folder}/vok.toml", "w") as file:
             file.write("[vocab]\n")
             file.close()
     else:
         exit()
-
-print('vokss File was found')
+vok = toml.load(f"{folder}/vok.toml")
+print('Vok File was found')
 print(f' ')
 print(f'-------------------------------------------')
 print(f'Inizialisieren erfolgreich abgeschlossen')
@@ -72,13 +76,10 @@ print(f' ')
 print(f' ')
 print(f'-------------------------------------------------------------------------------------------')
 print(f' ')
-print(f'        vokssabel Trainer by ItzSimmi, BReep und ico277, Version {VERSION}')
+print(f'        Vokabel Trainer by ItzSimmi, BReep und ico277, Version {VERSION}')
 print(f' ')
 print(f'-------------------------------------------------------------------------------------------')
 root = Tk()
-voks = configparser.ConfigParser()
-keys = list(voks.read('vok.ini'))
-print (keys)
 root.withdraw()
 print(f'Willkommen, ' + username)
 print(f' ')
@@ -102,16 +103,14 @@ while True:
         global rnd_key_old
         rnd_key_old = None
         while True:
-            datei = config['DEFAULT']['pfad']
-            keys = list(config['DEFAULT'])
-            print (keys)
+            keys = list(vok["vocab"].keys())
             if len(keys) < 1:
-                messagebox.askokcancel("Vocab", "Es sind keine vokssabeln gespeichert oder weniger als 2 vokssablen verfügbar.\nBitte fügen sie vokssabeln hinzu.")
+                messagebox.askokcancel("Vocab", "Es sind keine Vokabeln gespeichert oder weniger als 2 Vokablen verfügbar.\nBitte fügen sie Vokabeln hinzu.")
                 break
             rnd_key = random.choice(keys)
             while rnd_key == rnd_key_old:
                 rnd_key = random.choice(keys)
-            rnd_value = keys["vocab"][rnd_key]
+            rnd_value = vok["vocab"][rnd_key]
             if random.randrange(2) == 1:
                 antwort = simpledialog.askstring("Deutsch", f"Deutsch: Was heißt '{rnd_key}'?")
                 if antwort == None:
@@ -148,7 +147,7 @@ while True:
                     break
                 else:
                     print(neues_fremdsprache)
-                    voks["vocab"][neues_deutsch] = neues_fremdsprache
+                    vok["vocab"][neues_deutsch] = neues_fremdsprache
     elif aufgabe == 'credits':
         print('Created with <3 by Simon ,Enrico and BReep')
     elif aufgabe == 'Simon':
@@ -167,9 +166,9 @@ while True:
         break
 
 try:
-    vokss_file = open(f"{folder}/vokss.toml", "w")
-    vokss_file.write(toml.dumps(vokss))
-    vokss_file.close()
+    vok_file = open(f"{folder}/vok.toml", "w")
+    vok_file.write(toml.dumps(vok))
+    vok_file.close()
 except Exception as ex:
-    messagebox.askokcancel("Fehler", "Ein fehler ist aufgetreten beim speichern der vokabeln!")
+    messagebox.askokcancel("Fehler", "Ein fehler ist aufgetreten beim speichern der Vokabeln!")
     raise ex
