@@ -1,0 +1,13 @@
+0.2.2-beta:
+
+NEU
+- Config File
+- Debug Mode
+- Changeable Path
+- Username
+
+FIX
+- Tkinter Doppeltes Fenster
+
+
+0.2.3-beta:
