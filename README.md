@@ -12,7 +12,7 @@ Mittlerweile ist er für das Projekt unverzichtbar geworden.
 
 - Downloade diese Zip und entpacke diese.
 - Downloade und Installiere Python 3 
-- Öffne die eingameaufforderung und geben ein: "pip install toml"
+- Öffne die Eingabeaufforderung und geben ein: "pip install toml"
 - Starte die start.bat
 - Viel Spaß
 
@@ -24,7 +24,7 @@ https://discord.gg/qgAh6R5vS5
 
 -- SUPPORT --
 
-Wir Supporten Probleme auf unserem Discord.
+Wir supporten Probleme auf unserem Discord.
 
 Wir geben KEINEN Support für umgecodete Versionen
 
@@ -33,11 +33,11 @@ Unser Projekt ist Open Source auf GitHub verfügbar
 
 -- DANKSAGUNG --
 
-Ich möchte hier allen Danken, die mich auf meinem Weg zu dem Punkt begleitet haben.
+Ich möchte hier allen danken, die mich auf meinem Weg zu dem Punkt begleitet haben.
 Viele Leute haben gesagt: "Das geht nicht mit Python" oder "Du kannst das nicht".
 Ich habe immer weitergemacht, und jetzt bin ich an dem Punkt, wo ich hinwollte.
 
-Ich danke, auch wenn es komisch klingt, den hatern.
+Ich danke, auch wenn es komisch klingt, den Hatern.
 Durch euch hatte ich immer eine Motivation, weiterzumachen.
 
 
